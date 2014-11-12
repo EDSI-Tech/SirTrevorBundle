@@ -4,7 +4,11 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--<services>
+    <services>
+        <!-- Serializer -->
+        <service id="edsi_tech_sir_trevor.serializer.block_serializer" class="EdsiTech\SirTrevorBundle\Serializer\BlockSerializer" public="false" />
 
-    </services>-->
+        <!-- Public handler -->
+        <service id="edsi_tech_sir_trevor.handler.block_handler" class="EdsiTech\SirTrevorBundle\Handler\BlockHandler" />
+    </services>
 </container>
