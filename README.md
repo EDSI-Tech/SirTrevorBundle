@@ -65,6 +65,37 @@ Controller example:
     }
 ```
 
+### "back" button
+
+The bar on top added by this bundle can include a "back" button.
+Just provide the URL it should point to in your controller:
+
+```php
+    public function renderAction()
+    {
+        return $this->render('myTwigTemplate', [
+            'back_link`     => '/',
+            'blocks'        => [] // an array of AbstractBlocks
+            'is_editable'   => true
+        ]);
+    }
+```
+
+### Even more buttons
+
+You can provide more buttons/HTML to add to the bar on top of the page via `save_bar_buttons`:
+
+```php
+    public function renderAction()
+    {
+        return $this->render('myTwigTemplate', [
+            'save_bar_buttons` => '<a href="http://madebymany.github.io/sir-trevor-js/docs.html">Sir Trevor doc</a>',
+            'blocks'        => [] // an array of AbstractBlocks
+            'is_editable'   => true
+        ]);
+    }
+```
+
 
 ## Full working example
 
@@ -82,8 +113,10 @@ The controller:
         }
             
         return $this->render('myTwigTemplate', [
+            'back_link`     => '/',
             'blocks'        => [] // an array of AbstractBlocks
-            'is_editable'   => true
+            'is_editable'   => true,
+            'save_bar_buttons` => '<a href="http://madebymany.github.io/sir-trevor-js/docs.html">Sir Trevor doc</a>',
         ]);
     }
 ```
