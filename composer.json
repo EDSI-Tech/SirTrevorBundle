@@ -1,0 +1,25 @@
+{
+    "name": "edsi-tech/sir-trevor-bundle",
+    "type": "symfony-bundle",
+    "description": "Bundle integrating SirTrevor library",
+    "authors": [
+        {
+            "name": "Romaric Drigon",
+            "email": "r.drigon@edsi-tech.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "EdsiTech\\SirTrevorBundle\\": ""
+        }
+    },
+    "require": {
+        "php": "~5.4",
+        "symfony/symfony": "~2.3",
+        "doctrine/orm": "~2.2,>=2.2.3",
+        "doctrine/doctrine-bundle": "~1.2",
+        "twig/extensions": "~1.0",
+        "symfony/assetic-bundle": "~2.3",
+        "erusev/parsedown": "~1.1"
+    }
+}
