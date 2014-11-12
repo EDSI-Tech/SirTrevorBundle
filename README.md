@@ -95,7 +95,7 @@ The template:
         <title>SirTrevor example</title>
     </head>
     <body>
-        <div>Some content tha won't be editable by SirTrevor</div>
+        <div>Some content that won't be editable by SirTrevor</div>
         <div>{{ cms_render(blocks) }}</div>
     </body>
 </html>
