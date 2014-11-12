@@ -1,0 +1,5 @@
+{% use 'EdsiTechSirTrevorBundle:Render:_blocks_theme.html.twig' %}
+
+{% for block in blocks %}
+    {{ block('block_' ~ block.type) }}
+{% endfor %}

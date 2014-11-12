@@ -1,0 +1,169 @@
+{% block form %}
+    <form action="" method="post">
+        <textarea id="sir-trevor" class="sir-trevor" name="blocks">{{ json_blocks }}</textarea>
+
+        <div class="save-bar">
+            {{ save_bar_buttons|raw }}
+
+            <input type="submit" value="{{ 'edit.save'|trans }}" class="submit button">
+
+            {% if back_link is not null %}
+                <a href="{{ back_link }}" class="button back_link">{{ 'edit.back'|trans }}</a>
+            {% endif %}
+        </div>
+    </form>
+{% endblock form %}
+
+{% block javascript_loader %}
+    <script type="text/javascript">
+        /*
+            Function called when SirTrevor script is loaded
+         */
+
+        var SirTrevor = {}; // not to have a fatal on undefined SirTrevor
+        var $ = {}; // and on jQuery
+
+        var init = function() {
+            {% block sir_trevor_config %}
+                SirTrevor.LANGUAGE = "{{ app.request.locale|slice(0,2) }}";
+            {% endblock sir_trevor_config %}
+
+            // We load SirTrevor
+            {% block sir_trevor_loading %}
+                window.editor = new SirTrevor.Editor({
+                    el: $('#sir-trevor'),
+                    blockTypes: ["Heading", "Text"]
+                });
+            {% endblock sir_trevor_loading %}
+
+            // We display flash messages with Messenger
+            {% block messenger_config %}
+                Messenger.options = {
+                    extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
+                    theme: 'flat'
+                };
+            {% endblock messenger_config %}
+
+            {% if display_flashMessages == true %}
+                {% block flashMessages_info %}
+                    {% for flashMessage in app.session.flashbag.get('info') %}
+                        Messenger().post({
+                            message: '{{ flashMessage }}',
+                            type: 'info',
+                            hideAfter: 10,
+                            hideOnNavigate: false
+                        });
+                    {% endfor %}
+                {% endblock flashMessages_info %}
+
+                {% block flashMessages_error %}
+                    {% for flashMessage in app.session.flashbag.get('error') %}
+                        Messenger().post({
+                            message: '{{ flashMessage }}',
+                            type: 'error',
+                            hideAfter: 30 {# displayed longer! #}
+                        });
+                    {% endfor %}
+                {% endblock flashMessages_error %}
+
+                {% block flashMessages_success %}
+                    {% for flashMessage in app.session.flashbag.get('success') %}
+                        Messenger().post({
+                            message: '{{ flashMessage }}',
+                            type: 'success',
+                            hideAfter: 10,
+                            hideOnNavigate: false
+                        });
+                    {% endfor %}
+                {% endblock flashMessages_success %}
+            {% endif %}
+        };
+
+        /*
+            CSS & JS Loader
+         */
+
+        // Check if did not already loaded SirTrevor
+        if (typeof sirTrevorLoading !== 'undefined') {
+            init();
+        } else {
+            sirTrevorLoading = true;
+
+            // helper functions
+            var loadCSS = function(url) {
+                var link = document.createElement('link');
+                link.href = url;
+                link.type = 'text/css';
+                link.rel  = 'stylesheet';
+                link.media = 'screen';
+
+                document.getElementsByTagName('head')[0].appendChild(link);
+            };
+            var loadJS = function(url, callback) {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+
+                // Watch out order is extremely important for onload event
+                if (typeof callback === 'function') {
+                    if (script.readyState){  // IE
+                        script.onreadystatechange = function() {
+                            if (script.readyState == "loaded" ||
+                                    script.readyState == "complete"){
+                                script.onreadystatechange = null;
+                                callback();
+                            }
+                        };
+                    } else {  // Others
+                        script.onload = function() {
+                            callback();
+                        };
+                    }
+                }
+
+                script.src = url;
+                document.getElementsByTagName('head')[0].appendChild(script);
+            };
+
+            // First of all, we load PaceJS, the loading bar
+            loadCSS({% stylesheets filter='cssrewrite' 'bundles/edsitechsirtrevor/pace-js/center-radar-st.css' %} "{{ asset_url }}"{% endstylesheets %});
+            // configure before bringing the JS
+            {% block page_config %}
+                paceOptions = {
+                    ajax: false, // disabled
+                    document: false, // disabled
+                    eventLag: false, // disabled
+                    elements: {
+                        selectors: ['.st-ready']
+                    }
+                };
+            {% endblock page_config %}
+            loadJS({% javascripts 'bundles/edsitechsirtrevor/pace-js/pace.min.js' %}"{{ asset_url }}"{% endjavascripts %});
+
+            // We are using Assetic anyway to combine & minify
+            // We force combine, even in DEV, to make sure libraries are loaded in correct order
+            var stylesheet = {% stylesheets filter='cssrewrite' combine=true
+                    'bundles/edsitechsirtrevor/sir-trevor/sir-trevor.css'
+                    'bundles/edsitechsirtrevor/sir-trevor/sir-trevor-icons.css'
+                    'bundles/edsitechsirtrevor/messenger/css/messenger.css'
+                    'bundles/edsitechsirtrevor/messenger/css/messenger-theme-flat.css'
+                    'bundles/edsitechsirtrevor/style.css'
+                %}"{{ asset_url }}"{% endstylesheets %};
+
+            // We load CSS without caring too much
+            loadCSS(stylesheet);
+
+            var script = {% javascripts combine=true
+                    'bundles/edsitechsirtrevor/jquery.min.js'
+                    'bundles/edsitechsirtrevor/underscore-min.js'
+                    'bundles/edsitechsirtrevor/eventable.js'
+                    'bundles/edsitechsirtrevor/sir-trevor/sir-trevor.min.js'
+                    'bundles/edsitechsirtrevor/sir-trevor/locales/*'
+                    'bundles/edsitechsirtrevor/messenger/js/messenger.min.js'
+                    'bundles/edsitechsirtrevor/messenger/js/messenger-theme-flat.js'
+                %}"{{ asset_url }}"{% endjavascripts %};
+
+            // We load Javascripts, with a callback
+            loadJS(script, init);
+        }
+    </script>
+{% endblock javascript_loader %}
