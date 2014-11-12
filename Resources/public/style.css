@@ -1,0 +1,91 @@
+/*
+    CMSRendering Bundle stylesheet
+*/
+
+/* Hide while loading */
+.sir-trevor {
+    display: none;
+}
+
+/* Save bar is at the top */
+.save-bar {
+    background: rgba(0, 0, 0, 0.7);
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    padding: 20px 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+}
+
+.save-bar .button {
+    display: block;
+    padding: 10px 19px;
+    font-size: 17px;
+    line-height: 1.471;
+    background: #34e0c2;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    transition: border .25s linear, color .25s linear, background-color .25s linear;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+.save-bar .button:hover {
+    background: #32cbb0;
+}
+.save-bar .submit {
+    float: right;
+    margin-right: 80px;
+}
+.save-bar .back_link {
+    float: right;
+    margin-right: 20px;
+}
+
+/* Add some room for our bar */
+body {
+    margin-top: 85px;
+}
+
+/* Reset some styles, normalize */
+.save-bar a {
+    text-decoration: none;
+}
+.messenger-message {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+}
+.st-block__delete-label, .st-block-controls {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+}
+[data-icon]:before, [data-icon-after]:after {
+    line-height: 58px;
+}
+.st-outer a:hover {
+    text-decoration: none;
+}
+.st-outer label {
+    margin: 0;
+}
+a.st-block-control {
+    color: #42474b;
+}
+
+/*
+    We override some of SirTrevor editor styles
+*/
+.st-block__inner {
+    padding: 10px 15px;
+}
+.st-text-block {
+    font-size: 1em;
+    min-height: 34px; /* for buttons on the rights */
+}
+.st-text-block--heading {
+    font-size: 2em;
+}
