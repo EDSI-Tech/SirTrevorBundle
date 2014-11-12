@@ -74,7 +74,7 @@ Just provide the URL it should point to in your controller:
     public function renderAction()
     {
         return $this->render('myTwigTemplate', [
-            'back_link`     => '/',
+            'back_link'     => '/',
             'blocks'        => [] // an array of AbstractBlocks
             'is_editable'   => true
         ]);
@@ -89,7 +89,7 @@ You can provide more buttons/HTML to add to the bar on top of the page via `save
     public function renderAction()
     {
         return $this->render('myTwigTemplate', [
-            'save_bar_buttons` => '<a href="http://madebymany.github.io/sir-trevor-js/docs.html">Sir Trevor doc</a>',
+            'save_bar_buttons' => '<a href="http://madebymany.github.io/sir-trevor-js/docs.html">Sir Trevor doc</a>',
             'blocks'        => [] // an array of AbstractBlocks
             'is_editable'   => true
         ]);
@@ -113,7 +113,7 @@ The controller:
         }
             
         return $this->render('myTwigTemplate', [
-            'back_link`     => '/',
+            'back_link'     => '/',
             'blocks'        => [] // an array of AbstractBlocks
             'is_editable'   => true,
             'save_bar_buttons` => '<a href="http://madebymany.github.io/sir-trevor-js/docs.html">Sir Trevor doc</a>',

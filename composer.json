@@ -1,5 +1,6 @@
 {
     "name": "edsi-tech/sir-trevor-bundle",
+    "licence": "mit",
     "type": "symfony-bundle",
     "description": "Bundle integrating SirTrevor library",
     "authors": [
