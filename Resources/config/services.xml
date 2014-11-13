@@ -6,7 +6,7 @@
 
     <services>
         <!-- Twig -->
-        <service id="edsi_tech_sir_trevor.twig.cms_rendering_extension" class="EdsiTech\SirTrevorBundle\Twig\CMSRenderingExtension" public="false">
+        <service id="edsi_tech_sir_trevor.twig.sir_trevor_extension" class="EdsiTech\SirTrevorBundle\Twig\SirTrevorExtension" public="false">
             <argument type="service" id="edsi_tech_sir_trevor.serializer.block_serializer" />
             <tag name="twig.extension" />
         </service>
