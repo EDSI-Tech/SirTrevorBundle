@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\Config\FileLocator;
 
-class MyCityCMSRenderingExtension extends Extension
+class EdsiTechSirTrevorExtension extends Extension
 {
     /**
      * @inheritdoc
