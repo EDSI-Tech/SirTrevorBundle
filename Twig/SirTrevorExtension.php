@@ -90,10 +90,15 @@ class SirTrevorExtension extends \Twig_Extension
      * @param \Twig_Environment $environment
      * @param $context
      * @param AbstractBlock $block
+     * @throws \Exception
      * @return string
      */
-    public function blockRender(\Twig_Environment $environment, $context, AbstractBlock $block)
+    public function blockRender(\Twig_Environment $environment, $context, $block)
     {
+        if (! $block instanceof AbstractBlock) {
+            throw new \Exception('Object passed to block_render() Twig function is not an AbstractBlock. Or maybe you passed an erroneous array to cms_render() ?');
+        }
+
         // Will take care of caching it properly!
         /** @var \Twig_Template $blocksThemeTemplate */
         $blocksThemeTemplate = $environment->loadTemplate($this->blocksTheme);
