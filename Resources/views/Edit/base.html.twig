@@ -3,7 +3,9 @@
         <textarea id="sir-trevor" class="sir-trevor" name="blocks">{{ json_blocks }}</textarea>
 
         <div class="save-bar">
-            {{ save_bar_buttons|raw }}
+            {% if save_bar_buttons is not null %}
+                {{ save_bar_buttons|raw }}
+            {% endif %}
 
             <input type="submit" value="{{ 'edit.save'|trans }}" class="submit button">
 
