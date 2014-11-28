@@ -33,6 +33,15 @@ To render the editor, put in a Twig template:
 You must pass to this template a `blocks` variable , containing a collection  of `AbstractBlock`.
 Moreover, using a `is_editable` variable, you can decide whether to render a content editable with SirTrevor or just to render the blocks as plain old HTML.
 
+By default we use the theme `EdsiTechSirTrevorBundle:Render:_blocks_theme.html.twig`.  
+You can change it via Bundle config:
+
+```yaml
+# app/config/config.yml
+edsi_tech_sir_trevor:
+    edsi_tech_sir_trevor: 'EdsiTechSirTrevorBundle:Render:_blocks_theme.html.twig'
+```
+
 ### Saving blocks
 
 Blocks will be re-send to your controller, via POST.
