@@ -15,6 +15,14 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('edsi_tech_sir_trevor');
 
+        $rootNode
+            ->children()
+                ->scalarNode('blocks_theme')
+                    ->defaultValue('EdsiTechSirTrevorBundle:Render:_blocks_theme.html.twig')
+                ->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }

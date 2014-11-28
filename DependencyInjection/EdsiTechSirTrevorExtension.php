@@ -19,5 +19,7 @@ class EdsiTechSirTrevorExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        $container->setParameter('edsi_tech_sir_trevor_blocks_theme', $config['blocks_theme']);
     }
 }
