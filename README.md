@@ -6,6 +6,8 @@ SirTrevor editor works with "blocks", fragment of content of different types.
 This bundle allow you to map those to Doctrine entities. 
 Secondly, it provides a TwigExtension & templates to easily achieve a clean SirTrevor integration.
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/36f41ca4-4517-41c8-9c69-d0e3376732d6/big.png)](https://insight.sensiolabs.com/projects/36f41ca4-4517-41c8-9c69-d0e3376732d6)
+
 
 ## Installation
 
