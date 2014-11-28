@@ -8,6 +8,7 @@
         <!-- Twig -->
         <service id="edsi_tech_sir_trevor.twig.sir_trevor_extension" class="EdsiTech\SirTrevorBundle\Twig\SirTrevorExtension" public="false">
             <argument type="service" id="edsi_tech_sir_trevor.serializer.block_serializer" />
+            <argument>%edsi_tech_sir_trevor_blocks_theme%</argument>
             <tag name="twig.extension" />
         </service>
 
