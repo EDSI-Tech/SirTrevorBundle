@@ -19,7 +19,8 @@ class BlockHandler
 
         // Like this is easier than with JMS!
         $unserializedBlocks = [];
-        for ($i = 0; $i < count($newData); $i++) {
+        $count = count($newData);
+        for ($i = 0; $i < $count; $i++) {
             $unserializedBlocks[] = $this->unserializeBlock($newData[$i], $i);
         }
 
