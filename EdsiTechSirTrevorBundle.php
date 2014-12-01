@@ -6,4 +6,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class EdsiTechSirTrevorBundle extends Bundle
 {
-} 
+}

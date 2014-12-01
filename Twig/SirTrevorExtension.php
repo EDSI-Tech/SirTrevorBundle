@@ -134,3 +134,4 @@ class SirTrevorExtension extends \Twig_Extension
         return 'sir_trevor_extension';
     }
 }
+
