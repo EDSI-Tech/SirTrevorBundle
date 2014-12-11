@@ -20,6 +20,9 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('blocks_theme')
                     ->defaultValue('EdsiTechSirTrevorBundle:Render:_blocks_theme.html.twig')
                 ->end()
+                ->scalarNode('render_template')
+                    ->defaultValue('EdsiTechSirTrevorBundle:Render:base.html.twig')
+                ->end()
             ->end()
         ;
 

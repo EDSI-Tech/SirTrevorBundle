@@ -17,16 +17,20 @@ class SirTrevorExtension extends \Twig_Extension
      */
     private $blocksTheme;
 
+    /**
+     * @var string
+     */
+    private $renderTemplate;
 
-    const BLOCK_RENDER_TEMPLATE = 'EdsiTechSirTrevorBundle:Render:base.html.twig';
 
     const BLOCK_EDIT_TEMPLATE = 'EdsiTechSirTrevorBundle:Edit:base.html.twig';
 
 
-    public function __construct(BlockSerializer $blockSerializer, $blocksTheme)
+    public function __construct(BlockSerializer $blockSerializer, $blocksTheme, $renderTemplate)
     {
         $this->blockSerializer  = $blockSerializer;
         $this->blocksTheme      = $blocksTheme;
+        $this->renderTemplate   = $renderTemplate;
     }
 
     /**
@@ -79,7 +83,7 @@ class SirTrevorExtension extends \Twig_Extension
             ]);
         }
 
-        return $environment->render(self::BLOCK_RENDER_TEMPLATE, [
+        return $environment->render($this->renderTemplate, [
             'blocks' => $blocks
         ]);
     }
