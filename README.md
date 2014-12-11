@@ -144,3 +144,19 @@ The template:
     </body>
 </html>
 ```
+
+## Configuration
+
+### Themes
+
+When the content is rendered, we are using a `blocks_theme` to determine the HTML for each block *(in a manner pretty similar to Symfony2 Form theme)*. 
+A default implementation is included; if you want to customize it, you can set your own Twig template in configuration.
+
+All blocks are rendered within a `render_template` you can also override.
+
+```yaml
+# app/config/config.yml
+edsi_tech_sir_trevor:
+    blocks_theme: EdsiTechSirTrevorBundle:Render:_blocks_theme.html.twig
+    render_template: EdsiTechSirTrevorBundle:Render:base.html.twig
+```
