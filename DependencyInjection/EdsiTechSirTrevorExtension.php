@@ -21,5 +21,6 @@ class EdsiTechSirTrevorExtension extends Extension
         $loader->load('services.xml');
 
         $container->setParameter('edsi_tech_sir_trevor_blocks_theme', $config['blocks_theme']);
+        $container->setParameter('edsi_tech_sir_trevor_render_template', $config['render_template']);
     }
 }
