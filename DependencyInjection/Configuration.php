@@ -28,6 +28,11 @@ class Configuration implements ConfigurationInterface
                     ->prototype('scalar')
                     ->end()
                 ->end()
+                ->arrayNode('allowed_blocks')
+                    ->defaultValue(['Text', 'Heading'])
+                    ->prototype('scalar')
+                    ->end()
+                ->end()
             ->end()
         ;
 

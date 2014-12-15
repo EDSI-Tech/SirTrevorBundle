@@ -32,9 +32,14 @@
 
             // We load SirTrevor
             {% block sir_trevor_loading %}
+                var blocks = [];
+                {% for block in allowed_blocks %}
+                    blocks.push(block);
+                {% endfor %}
+
                 window.editor = new SirTrevor.Editor({
                     el: $('#sir-trevor'),
-                    blockTypes: ["Heading", "Text"]
+                    blockTypes: blocks
                 });
             {% endblock sir_trevor_loading %}
 

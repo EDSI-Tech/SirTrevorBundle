@@ -27,16 +27,22 @@ class SirTrevorExtension extends \Twig_Extension
      */
     private $extraJsFiles;
 
+    /**
+     * @var string[]
+     */
+    private $allowedBlocks;
+
 
     const BLOCK_EDIT_TEMPLATE = 'EdsiTechSirTrevorBundle:Edit:base.html.twig';
 
 
-    public function __construct(BlockSerializer $blockSerializer, $blocksTheme, $renderTemplate, $extraJsFiles)
+    public function __construct(BlockSerializer $blockSerializer, $blocksTheme, $renderTemplate, $extraJsFiles, $allowedBlocks)
     {
         $this->blockSerializer  = $blockSerializer;
         $this->blocksTheme      = $blocksTheme;
         $this->renderTemplate   = $renderTemplate;
         $this->extraJsFiles     = $extraJsFiles;
+        $this->allowedBlocks    = $allowedBlocks;
     }
 
     /**
@@ -82,6 +88,7 @@ class SirTrevorExtension extends \Twig_Extension
     {
         if (isset($context['is_editable']) && $context['is_editable']) {
             return $environment->render(self::BLOCK_EDIT_TEMPLATE, [
+                'allowed_blocks' => $this->allowedBlocks,
                 'back_link'     => isset($context['back_link']) ? $context['back_link'] : null,
                 'display_flashMessages' => isset($context['display_flashMessages']) ? $context['display_flashMessages'] : true, // by default we display flashes in Edit
                 'extra_js_files' => $this->extraJsFiles,

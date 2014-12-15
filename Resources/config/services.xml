@@ -11,6 +11,7 @@
             <argument>%edsi_tech_sir_trevor_blocks_theme%</argument>
             <argument>%edsi_tech_sir_trevor_render_template%</argument>
             <argument>%edsi_tech_sir_trevor_extra_js_files%</argument>
+            <argument>%edsi_tech_sir_trevor_allowed_blocks%</argument>
             <tag name="twig.extension" />
         </service>
 
