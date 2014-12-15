@@ -163,7 +163,7 @@ edsi_tech_sir_trevor:
 
 ### Adding an extra JS file
 
-You can inject another JS file, after the one provided are loaded.
+You can inject another JS file, loaded before SirTrevor is initialized.
 A common use case is to add some SirTrevor blocks.
 
 ```yaml
