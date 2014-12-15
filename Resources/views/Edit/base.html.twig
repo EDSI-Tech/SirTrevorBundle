@@ -28,57 +28,57 @@
 
         var init = function() {
             {% block sir_trevor_config %}
-                SirTrevor.LANGUAGE = "{{ app.request.locale|slice(0,2) }}";
+            SirTrevor.LANGUAGE = "{{ app.request.locale|slice(0,2) }}";
             {% endblock sir_trevor_config %}
 
             // We load SirTrevor
             {% block sir_trevor_loading %}
-                window.editor = new SirTrevor.Editor({
-                    el: $('#sir-trevor'),
-                    blockTypes: ["Heading", "Text"]
-                });
+            window.editor = new SirTrevor.Editor({
+                el: $('#sir-trevor'),
+                blockTypes: ["Heading", "Text"]
+            });
             {% endblock sir_trevor_loading %}
 
             // We display flash messages with Messenger
             {% block messenger_config %}
-                Messenger.options = {
-                    extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
-                    theme: 'flat'
-                };
+            Messenger.options = {
+                extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
+                theme: 'flat'
+            };
             {% endblock messenger_config %}
 
             {% if display_flashMessages == true %}
-                {% block flashMessages_info %}
-                    {% for flashMessage in app.session.flashbag.get('info') %}
-                        Messenger().post({
-                            message: '{{ flashMessage }}',
-                            type: 'info',
-                            hideAfter: 10,
-                            hideOnNavigate: false
-                        });
-                    {% endfor %}
-                {% endblock flashMessages_info %}
+            {% block flashMessages_info %}
+            {% for flashMessage in app.session.flashbag.get('info') %}
+            Messenger().post({
+                message: '{{ flashMessage }}',
+                type: 'info',
+                hideAfter: 10,
+                hideOnNavigate: false
+            });
+            {% endfor %}
+            {% endblock flashMessages_info %}
 
-                {% block flashMessages_error %}
-                    {% for flashMessage in app.session.flashbag.get('error') %}
-                        Messenger().post({
-                            message: '{{ flashMessage }}',
-                            type: 'error',
-                            hideAfter: 30 {# displayed longer! #}
-                        });
-                    {% endfor %}
-                {% endblock flashMessages_error %}
+            {% block flashMessages_error %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+            Messenger().post({
+                message: '{{ flashMessage }}',
+                type: 'error',
+                hideAfter: 30 {# displayed longer! #}
+            });
+            {% endfor %}
+            {% endblock flashMessages_error %}
 
-                {% block flashMessages_success %}
-                    {% for flashMessage in app.session.flashbag.get('success') %}
-                        Messenger().post({
-                            message: '{{ flashMessage }}',
-                            type: 'success',
-                            hideAfter: 10,
-                            hideOnNavigate: false
-                        });
-                    {% endfor %}
-                {% endblock flashMessages_success %}
+            {% block flashMessages_success %}
+            {% for flashMessage in app.session.flashbag.get('success') %}
+            Messenger().post({
+                message: '{{ flashMessage }}',
+                type: 'success',
+                hideAfter: 10,
+                hideOnNavigate: false
+            });
+            {% endfor %}
+            {% endblock flashMessages_success %}
             {% endif %}
         };
 
@@ -88,11 +88,7 @@
 
         // Check if did not already loaded SirTrevor
         if (typeof sirTrevorLoading !== 'undefined') {
-            scriptsCount--;
-
-            if (0 === scriptsCount) {
-                init();
-            }
+            init();
         } else {
             sirTrevorLoading = true;
 
@@ -109,6 +105,14 @@
             var loadJS = function(urls, callback) {
                 scriptsCount = urls.length;
 
+                var runCallback = function() {
+                    scriptsCount--;
+
+                    if (scriptsCount === 0) {
+                        callback();
+                    }
+                };
+
                 for (var _i in urls) {
                     var script = document.createElement('script');
                     script.type = 'text/javascript';
@@ -120,12 +124,12 @@
                                 if (script.readyState == "loaded" ||
                                         script.readyState == "complete"){
                                     script.onreadystatechange = null;
-                                    callback();
+                                    runCallback();
                                 }
                             };
                         } else {  // Others
                             script.onload = function() {
-                                callback();
+                                runCallback();
                             };
                         }
                     }
@@ -139,14 +143,14 @@
             loadCSS({% stylesheets filter='cssrewrite' 'bundles/edsitechsirtrevor/pace-js/center-radar-st.css' %} "{{ asset_url }}"{% endstylesheets %});
             // configure before bringing the JS
             {% block pace_config %}
-                paceOptions = {
-                    ajax: false, // disabled
-                    document: false, // disabled
-                    eventLag: false, // disabled
-                    elements: {
-                        selectors: ['.st-ready']
-                    }
-                };
+            paceOptions = {
+                ajax: false, // disabled
+                document: false, // disabled
+                eventLag: false, // disabled
+                elements: {
+                    selectors: ['.st-ready']
+                }
+            };
             {% endblock pace_config %}
             loadJS([{% javascripts 'bundles/edsitechsirtrevor/pace-js/pace.min.js' %}"{{ asset_url }}"{% endjavascripts %}]);
 
@@ -174,15 +178,13 @@
 
             var scripts = [script];
 
-            {% if extra_js_files is not empty %}
-                {% for file in extra_js_files %}
-                    scripts.push('{{ asset(file) }}');
-                {% endfor %}
+            {% if extra_js_file is not null %}
+            scripts.push('{{ asset(extra_js_file) }}');
             {% endif %}
 
             // We load Javascripts, with a callback
             {% block init %}
-                loadJS(scripts, init);
+            loadJS(scripts, init);
             {% endblock init %}
         }
     </script>
