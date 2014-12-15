@@ -27,12 +27,6 @@
         var scriptsCount = 0;
 
         var init = function() {
-            scriptsCount--;
-
-            if (0 !== scriptsCount) {
-                return; // so callback run only once
-            }
-
             {% block sir_trevor_config %}
                 SirTrevor.LANGUAGE = "{{ app.request.locale|slice(0,2) }}";
             {% endblock sir_trevor_config %}
@@ -94,7 +88,11 @@
 
         // Check if did not already loaded SirTrevor
         if (typeof sirTrevorLoading !== 'undefined') {
-            init();
+            scriptsCount--;
+
+            if (0 === scriptsCount) {
+                init();
+            }
         } else {
             sirTrevorLoading = true;
 
