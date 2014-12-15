@@ -160,3 +160,14 @@ edsi_tech_sir_trevor:
     blocks_theme: EdsiTechSirTrevorBundle:Render:_blocks_theme.html.twig
     render_template: EdsiTechSirTrevorBundle:Render:base.html.twig
 ```
+
+### Adding an extra JS file
+
+You can inject another JS file, after the one provided are loaded.
+A common use case is to add some SirTrevor blocks.
+
+```yaml
+# app/config/config.yml
+edsi_tech_sir_trevor:
+    extra_js_file: 'bundles/acmedemo/js/blocks.js'
+```

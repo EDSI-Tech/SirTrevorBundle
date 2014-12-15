@@ -23,6 +23,9 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('render_template')
                     ->defaultValue('EdsiTechSirTrevorBundle:Render:base.html.twig')
                 ->end()
+                ->scalarNode('extra_js_file')
+                    ->defaultValue(null)
+                ->end()
             ->end()
         ;
 

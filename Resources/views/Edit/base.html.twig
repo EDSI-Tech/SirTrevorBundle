@@ -26,6 +26,13 @@
         var $ = {}; // and on jQuery
 
         var init = function() {
+            {% block extra_js_file %}
+                {# we may have some user supplied file to load #}
+                {% if extra_js_file is not null %}
+                    loadJS('{{ asset(extra_js_file) }}');
+                {% endif %}
+            {% endblock extra_js_file %}
+
             {% block sir_trevor_config %}
                 SirTrevor.LANGUAGE = "{{ app.request.locale|slice(0,2) }}";
             {% endblock sir_trevor_config %}
