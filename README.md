@@ -169,5 +169,6 @@ A common use case is to add some SirTrevor blocks.
 ```yaml
 # app/config/config.yml
 edsi_tech_sir_trevor:
-    extra_js_file: 'bundles/acmedemo/js/blocks.js'
+    extra_js_files: 
+        - 'bundles/acmedemo/js/custom-block.js'
 ```

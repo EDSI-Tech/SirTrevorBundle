@@ -23,20 +23,20 @@ class SirTrevorExtension extends \Twig_Extension
     private $renderTemplate;
 
     /**
-     * @var string
+     * @var string[]
      */
-    private $extraJsFile;
+    private $extraJsFiles;
 
 
     const BLOCK_EDIT_TEMPLATE = 'EdsiTechSirTrevorBundle:Edit:base.html.twig';
 
 
-    public function __construct(BlockSerializer $blockSerializer, $blocksTheme, $renderTemplate, $extraJsFile)
+    public function __construct(BlockSerializer $blockSerializer, $blocksTheme, $renderTemplate, $extraJsFiles)
     {
         $this->blockSerializer  = $blockSerializer;
         $this->blocksTheme      = $blocksTheme;
         $this->renderTemplate   = $renderTemplate;
-        $this->extraJsFile      = $extraJsFile;
+        $this->extraJsFiles     = $extraJsFiles;
     }
 
     /**
@@ -84,7 +84,7 @@ class SirTrevorExtension extends \Twig_Extension
             return $environment->render(self::BLOCK_EDIT_TEMPLATE, [
                 'back_link'     => isset($context['back_link']) ? $context['back_link'] : null,
                 'display_flashMessages' => isset($context['display_flashMessages']) ? $context['display_flashMessages'] : true, // by default we display flashes in Edit
-                'extra_js_file' => $this->extraJsFile,
+                'extra_js_files' => $this->extraJsFiles,
                 'json_blocks'   => $this->blockSerializer->serializeBlocks($blocks),
                 'save_bar_buttons' => isset($context['save_bar_buttons']) ? $context['save_bar_buttons'] : ''
             ]);

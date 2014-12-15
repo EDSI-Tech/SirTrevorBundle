@@ -174,8 +174,10 @@
 
             var scripts = [script];
 
-            {% if extra_js_file is not null %}
-                scripts.push('{{ asset(extra_js_file) }}');
+            {% if extra_js_files is not empty %}
+                {% for file in extra_js_files %}
+                    scripts.push('{{ asset(file) }}');
+                {% endfor %}
             {% endif %}
 
             // We load Javascripts, with a callback
