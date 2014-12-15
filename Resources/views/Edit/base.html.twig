@@ -19,13 +19,20 @@
 {% block javascript_loader %}
     <script type="text/javascript">
         /*
-            Function called when SirTrevor script is loaded
+         Function called when SirTrevor script is loaded
          */
 
         var SirTrevor = {}; // not to have a fatal on undefined SirTrevor
         var $ = {}; // and on jQuery
+        var scriptsCount = 0;
 
         var init = function() {
+            scriptsCount--;
+
+            if (0 !== scriptsCount) {
+                return; // so callback run only once
+            }
+
             {% block sir_trevor_config %}
                 SirTrevor.LANGUAGE = "{{ app.request.locale|slice(0,2) }}";
             {% endblock sir_trevor_config %}
@@ -82,7 +89,7 @@
         };
 
         /*
-            CSS & JS Loader
+         CSS & JS Loader
          */
 
         // Check if did not already loaded SirTrevor
@@ -101,29 +108,33 @@
 
                 document.getElementsByTagName('head')[0].appendChild(link);
             };
-            var loadJS = function(url, callback) {
-                var script = document.createElement('script');
-                script.type = 'text/javascript';
+            var loadJS = function(urls, callback) {
+                scriptsCount = urls.length;
 
-                // Watch out order is extremely important for onload event
-                if (typeof callback === 'function') {
-                    if (script.readyState){  // IE
-                        script.onreadystatechange = function() {
-                            if (script.readyState == "loaded" ||
-                                    script.readyState == "complete"){
-                                script.onreadystatechange = null;
+                for (var _i in urls) {
+                    var script = document.createElement('script');
+                    script.type = 'text/javascript';
+
+                    // Watch out order is extremely important for onload event
+                    if (typeof callback === 'function') {
+                        if (script.readyState){  // IE
+                            script.onreadystatechange = function() {
+                                if (script.readyState == "loaded" ||
+                                        script.readyState == "complete"){
+                                    script.onreadystatechange = null;
+                                    callback();
+                                }
+                            };
+                        } else {  // Others
+                            script.onload = function() {
                                 callback();
-                            }
-                        };
-                    } else {  // Others
-                        script.onload = function() {
-                            callback();
-                        };
+                            };
+                        }
                     }
-                }
 
-                script.src = url;
-                document.getElementsByTagName('head')[0].appendChild(script);
+                    script.src = urls[_i];
+                    document.getElementsByTagName('head')[0].appendChild(script);
+                }
             };
 
             // First of all, we load PaceJS, the loading bar
@@ -139,10 +150,9 @@
                     }
                 };
             {% endblock page_config %}
-            loadJS({% javascripts 'bundles/edsitechsirtrevor/pace-js/pace.min.js' %}"{{ asset_url }}"{% endjavascripts %});
+            loadJS([{% javascripts 'bundles/edsitechsirtrevor/pace-js/pace.min.js' %}"{{ asset_url }}"{% endjavascripts %}]);
 
             // We are using Assetic anyway to combine & minify
-            // We force combine, even in DEV, to make sure libraries are loaded in correct order
             var stylesheet = {% stylesheets filter='cssrewrite' combine=true
                     'bundles/edsitechsirtrevor/sir-trevor/sir-trevor.css'
                     'bundles/edsitechsirtrevor/sir-trevor/sir-trevor-icons.css'
@@ -164,15 +174,15 @@
                     'bundles/edsitechsirtrevor/messenger/js/messenger-theme-flat.js'
                 %}"{{ asset_url }}"{% endjavascripts %};
 
+            var scripts = [script];
+
+            {% if extra_js_file is not null %}
+                scripts.push('{{ asset(extra_js_file) }}');
+            {% endif %}
+
             // We load Javascripts, with a callback
             {% block init %}
-                {# we may have some user supplied file to load #}
-                {% if extra_js_file is not null %}
-                    loadJS(script);
-                    loadJS('{{ asset(extra_js_file) }}', init);
-                {% else %}
-                    loadJS(script, init);
-                {% endif %}
+                loadJS(scripts, init);
             {% endblock init %}
         }
     </script>
