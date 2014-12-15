@@ -10,7 +10,7 @@
             <argument type="service" id="edsi_tech_sir_trevor.serializer.block_serializer" />
             <argument>%edsi_tech_sir_trevor_blocks_theme%</argument>
             <argument>%edsi_tech_sir_trevor_render_template%</argument>
-            <argument>%edsi_tech_sir_trevor_extra_js_file%</argument>
+            <argument>%edsi_tech_sir_trevor_extra_js_files%</argument>
             <tag name="twig.extension" />
         </service>
 
