@@ -140,7 +140,7 @@
             // First of all, we load PaceJS, the loading bar
             loadCSS({% stylesheets filter='cssrewrite' 'bundles/edsitechsirtrevor/pace-js/center-radar-st.css' %} "{{ asset_url }}"{% endstylesheets %});
             // configure before bringing the JS
-            {% block page_config %}
+            {% block pace_config %}
                 paceOptions = {
                     ajax: false, // disabled
                     document: false, // disabled
@@ -149,7 +149,7 @@
                         selectors: ['.st-ready']
                     }
                 };
-            {% endblock page_config %}
+            {% endblock pace_config %}
             loadJS([{% javascripts 'bundles/edsitechsirtrevor/pace-js/pace.min.js' %}"{{ asset_url }}"{% endjavascripts %}]);
 
             // We are using Assetic anyway to combine & minify
