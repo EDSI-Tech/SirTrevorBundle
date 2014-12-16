@@ -54,7 +54,10 @@ class BlockHandler
         $block->id          = isset($data['data']['id']) ? $data['data']['id'] : null;
         $block->type        = $data['type'];
         $block->position    = $position;
-        $block->textContent = $data['data']['text'];
+        $block->textContent = isset($data['data']['text']) ? $data['data']['text'] : null;
+
+        // We store everything in raw data, as some types have other keys
+        $block->rawData     = $data['data'];
 
         return $block;
     }

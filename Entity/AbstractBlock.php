@@ -17,9 +17,14 @@ abstract class AbstractBlock
     protected $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $content;
+
+    /**
+     * @ORM\Column(type="json_array")
+     */
+    protected $rawData;
 
     /**
      * @ORM\Column(type="string")
@@ -36,22 +41,34 @@ abstract class AbstractBlock
      * @param string $type
      * @param string $content
      * @param int $position
+     * @param array $rawData
      */
-    public function __construct($type, $content, $position)
+    public function __construct($type, $content, $position, array $rawData)
     {
         $this->type     = $type;
         $this->content  = $content;
         $this->position = $position;
+        $this->rawData  = $rawData;
     }
 
     /**
      * Get content
      *
-     * @return string
+     * @return string|null
      */
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Get raw data
+     *
+     * @return array
+     */
+    public function getRawData()
+    {
+        return $this->rawData;
     }
 
     /**

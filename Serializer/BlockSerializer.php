@@ -16,12 +16,14 @@ class BlockSerializer
 
         /** @var AbstractBlock $block */
         foreach ($blocks as $block) {
+            $aData = $block->getRawData();
+
+            // make sure to inject (eventually) database-generated ID
+            $aData['id'] = $block->getId();
+
             $data['data'][] = [
                 'type'  => $block->getType(),
-                'data'  => [
-                    'id'    => $block->getId() ?: null,
-                    'text'  => $block->getContent()
-                ]
+                'data'  => $aData
             ];
 
         }

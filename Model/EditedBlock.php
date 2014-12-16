@@ -23,4 +23,9 @@ class EditedBlock
      * @var string
      */
     public $textContent;
+
+    /**
+     * @var array
+     */
+    public $rawData;
 }
