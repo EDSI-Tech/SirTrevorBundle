@@ -151,6 +151,7 @@ The template:
 ### Allowed blocks
 
 By defaults not all SirTrevor blocks are enabled, you can modify it in bundle configuration:
+
 ```yaml
 # app/config/config.yml
 edsi_tech_sir_trevor:
