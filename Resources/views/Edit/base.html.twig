@@ -106,41 +106,29 @@
 
                 document.getElementsByTagName('head')[0].appendChild(link);
             };
-            var loadJS = function(urls, callback) {
-                var scriptsCount = urls.length;
+            var loadJS = function(url, callback) {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
 
-                var runCallback = function() {
-                    scriptsCount--;
-
-                    if (scriptsCount === 0) {
-                        callback();
+                // Watch out order is extremely important for onload event
+                if (typeof callback === 'function') {
+                    if (script.readyState){  // IE
+                        script.onreadystatechange = function() {
+                            if (script.readyState == "loaded" ||
+                                    script.readyState == "complete"){
+                                script.onreadystatechange = null;
+                                callback();
+                            }
+                        };
+                    } else {  // Others
+                        script.onload = function() {
+                            callback();
+                        };
                     }
-                };
-
-                for (var _i in urls) {
-                    var script = document.createElement('script');
-                    script.type = 'text/javascript';
-
-                    // Watch out order is extremely important for onload event
-                    if (typeof callback === 'function') {
-                        if (script.readyState){  // IE
-                            script.onreadystatechange = function() {
-                                if (script.readyState == "loaded" ||
-                                        script.readyState == "complete"){
-                                    script.onreadystatechange = null;
-                                    runCallback();
-                                }
-                            };
-                        } else {  // Others
-                            script.onload = function() {
-                                runCallback();
-                            };
-                        }
-                    }
-
-                    script.src = urls[_i];
-                    document.getElementsByTagName('head')[0].appendChild(script);
                 }
+
+                script.src = url;
+                document.getElementsByTagName('head')[0].appendChild(script);
             };
 
             // First of all, we load PaceJS, the loading bar
@@ -156,7 +144,7 @@
                     }
                 };
             {% endblock pace_config %}
-            loadJS([{% javascripts 'bundles/edsitechsirtrevor/pace-js/pace.min.js' %}"{{ asset_url }}"{% endjavascripts %}]);
+            loadJS({% javascripts 'bundles/edsitechsirtrevor/pace-js/pace.min.js' %}"{{ asset_url }}"{% endjavascripts %});
 
             // We are using Assetic anyway to combine & minify
             var stylesheet = {% stylesheets filter='cssrewrite' combine=true
@@ -180,17 +168,17 @@
                     'bundles/edsitechsirtrevor/messenger/js/messenger-theme-flat.js'
                 %}"{{ asset_url }}"{% endjavascripts %};
 
-            var scripts = [script];
-
-            {% if extra_js_files is not empty %}
-                {% for file in extra_js_files %}
-                    scripts.push('{{ asset(file) }}');
-                {% endfor %}
-            {% endif %}
-
             // We load Javascripts, with a callback
             {% block init %}
-                loadJS(scripts, init);
+                {% if extra_js_file is not null %}
+                    var loadExtraFile = function() {
+                        loadJS('{{ asset(extra_js_file) }}', init)
+                    };
+
+                    loadJS(script, loadExtraFile);
+                {% else %}
+                    loadJS(script, init);
+                {% endif %}
             {% endblock init %}
         }
     </script>

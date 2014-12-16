@@ -184,7 +184,7 @@ edsi_tech_sir_trevor:
 
 ### Adding an extra JS file
 
-You can inject another JS file, loaded before SirTrevor is initialized.
+You can inject another JS file, loaded after included JS libraries but before the editor is initialized.
 A common use case is to add some SirTrevor blocks.
 
 ```yaml
@@ -193,7 +193,6 @@ edsi_tech_sir_trevor:
     allowed_blocks:
         - Text
         - Heading
-        - Custom
-    extra_js_files: 
-        - 'bundles/acmedemo/js/custom-block.js'
+        - Custom # tip: do not forget to enable your custom block!
+    extra_js_file: 'bundles/acmedemo/js/custom-block.js'
 ```
