@@ -34,7 +34,7 @@
             {% block sir_trevor_loading %}
                 var blocks = [];
                 {% for block in allowed_blocks %}
-                    blocks.push(block);
+                    blocks.push('{{ block }}');
                 {% endfor %}
 
                 window.editor = new SirTrevor.Editor({
