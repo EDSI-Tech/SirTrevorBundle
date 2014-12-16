@@ -145,7 +145,27 @@ The template:
 </html>
 ```
 
+
 ## Configuration
+
+### Allowed blocks
+
+By defaults not all SirTrevor blocks are enabled, you can modify it in bundle configuration:
+```yaml
+# app/config/config.yml
+edsi_tech_sir_trevor:
+    allowed_blocks:
+        # below are blocks enabled by default
+        # you can remove one of course!
+        - Text
+        - Heading
+        - List
+        - Quote
+        - Tweet
+        # and I also want to add SirTrevor Image & Video blocks (watch out file upload are not handled at the moment)
+        - Image
+        - Video
+```
 
 ### Themes
 
@@ -169,7 +189,7 @@ A common use case is to add some SirTrevor blocks.
 ```yaml
 # app/config/config.yml
 edsi_tech_sir_trevor:
-    allow_blocks:
+    allowed_blocks:
         - Text
         - Heading
         - Custom

@@ -29,7 +29,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->arrayNode('allowed_blocks')
-                    ->defaultValue(['Text', 'Heading'])
+                    ->defaultValue(['Text', 'Heading', 'List', 'Quote', 'Tweet'])
                     ->prototype('scalar')
                     ->end()
                 ->end()
