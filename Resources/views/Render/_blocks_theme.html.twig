@@ -1,7 +1,20 @@
+{% block block_heading %}
+    <h2>{{ block.content }}</h2>
+{% endblock block_heading %}
+
 {% block block_text %}
     <p>{{ block.content|markdown }}</p>
 {% endblock block_text %}
 
-{% block block_heading %}
-    <h2>{{ block.content }}</h2>
-{% endblock block_heading %}
+{% block block_list %}
+    <p>
+        {{ block.content|markdown }}
+    </p>
+{% endblock block_list %}
+
+{% block block_quote %}
+    {{ block.content|markdown }}{# markdown will generate a blockquote #}
+    {% if block.rawData.cite is defined %}
+        <cite>{{ block.rawData.cite }}</cite>
+    {% endif %}
+{% endblock block_quote %}
