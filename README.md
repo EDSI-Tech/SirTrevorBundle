@@ -158,14 +158,14 @@ edsi_tech_sir_trevor:
     allowed_blocks:
         # below are blocks enabled by default
         # you can remove one of course!
-        - Text
         - Heading
+        - Text
         - List
         - Quote
-        - Tweet
         # and I also want to add SirTrevor Image & Video blocks (watch out file upload are not handled at the moment)
         - Image
         - Video
+        - Tweet
 ```
 
 ### Themes
