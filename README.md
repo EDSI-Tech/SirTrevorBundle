@@ -196,3 +196,10 @@ edsi_tech_sir_trevor:
         - Custom # tip: do not forget to enable your custom block!
     extra_js_file: 'bundles/acmedemo/js/custom-block.js'
 ```
+
+
+## Going further
+
+### Getting Editor instance
+
+You can retrieve the SirTrevor instance in JS by doing `SirTrevor.getInstance()`
