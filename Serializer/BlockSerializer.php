@@ -21,6 +21,10 @@ class BlockSerializer
             // make sure to inject (eventually) database-generated ID
             $aData['id'] = $block->getId();
 
+            if (null !== $block->getContent()) {
+                $aData['text'] = $block->getContent();
+            }
+
             $data['data'][] = [
                 'type'  => $block->getType(),
                 'data'  => $aData
