@@ -2,7 +2,6 @@
 
 namespace EdsiTech\SirTrevorBundle\Twig;
 
-use EdsiTech\SirTrevorBundle\DependencyInjection\EditorOptions;
 use EdsiTech\SirTrevorBundle\Serializer\BlockSerializer;
 use EdsiTech\SirTrevorBundle\Entity\AbstractBlock;
 
@@ -14,7 +13,7 @@ class SirTrevorExtension extends \Twig_Extension
     private $blockSerializer;
 
     /**
-     * @var EditorOptions
+     * @var array of options validated from bundle Configuration
      */
     private $options;
 
@@ -22,7 +21,7 @@ class SirTrevorExtension extends \Twig_Extension
     const BLOCK_EDIT_TEMPLATE = 'EdsiTechSirTrevorBundle:Edit:base.html.twig';
 
 
-    public function __construct(BlockSerializer $blockSerializer, EditorOptions $options)
+    public function __construct(BlockSerializer $blockSerializer, array $options)
     {
         $this->blockSerializer  = $blockSerializer;
         $this->options          = $options;
@@ -71,17 +70,17 @@ class SirTrevorExtension extends \Twig_Extension
     {
         if (isset($context['is_editable']) && $context['is_editable']) {
             return $environment->render(self::BLOCK_EDIT_TEMPLATE, [
-                'allowed_blocks'    => $this->options->allowedBlocks,
+                'allowed_blocks'    => $this->options['allowed_blocks'],
                 'back_link'         => isset($context['back_link']) ? $context['back_link'] : null,
                 'display_flashMessages' => isset($context['display_flashMessages']) ? $context['display_flashMessages'] : true, // by default we display flashes in Edit
-                'extra_css_file'    => $this->options->extraCssFile,
-                'extra_js_file'     => $this->options->extraJsFile,
+                'extra_css_file'    => $this->options['extra_css_file'],
+                'extra_js_file'     => $this->options['extra_js_file'],
                 'json_blocks'       => $this->blockSerializer->serializeBlocks($blocks),
                 'save_bar_buttons'  => isset($context['save_bar_buttons']) ? $context['save_bar_buttons'] : ''
             ]);
         }
 
-        return $environment->render($this->options->renderTemplate, [
+        return $environment->render($this->options['render_template'], [
             'blocks' => $blocks
         ]);
     }
@@ -103,7 +102,7 @@ class SirTrevorExtension extends \Twig_Extension
 
         // Will take care of caching it properly!
         /** @var \Twig_Template $blocksThemeTemplate */
-        $blocksThemeTemplate = $environment->loadTemplate($this->options->blocksTheme);
+        $blocksThemeTemplate = $environment->loadTemplate($this->options['blocks_theme']);
 
         // Resolve block name
         $blockName = 'block_'.$block->getType();
