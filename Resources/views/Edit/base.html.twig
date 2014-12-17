@@ -27,7 +27,7 @@
 
         var init = function() {
             {% block sir_trevor_config %}
-                SirTrevor.LANGUAGE = "{{ app.request.locale|slice(0,2) }}";
+                SirTrevor.config.language = "{{ app.request.locale|slice(0,2) }}";
             {% endblock sir_trevor_config %}
 
             // We load SirTrevor
