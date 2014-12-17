@@ -20,9 +20,13 @@ class EdsiTechSirTrevorExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $container->setParameter('edsi_tech_sir_trevor_blocks_theme', $config['blocks_theme']);
-        $container->setParameter('edsi_tech_sir_trevor_render_template', $config['render_template']);
-        $container->setParameter('edsi_tech_sir_trevor_extra_js_file', $config['extra_js_file']);
-        $container->setParameter('edsi_tech_sir_trevor_allowed_blocks', $config['allowed_blocks']);
+        // We build options class
+        $options = new EditorOptions();
+        $options->allowedBlocks = $config['allowed_blocks'];
+        $options->blocksTheme   = $config['blocks_theme'];
+        $options->extraJsFile   = $config['extra_js_file'];
+        $options->renderTemplate = $config['render_template'];
+
+        $container->setParameter('edsi_tech_sir_trevor_options', $options);
     }
 }
