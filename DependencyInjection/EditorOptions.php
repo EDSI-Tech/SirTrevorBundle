@@ -23,6 +23,11 @@ class EditorOptions
     public $extraJsFile;
 
     /**
+     * @var string path (Assetic-compatible) to a CSS file to add
+     */
+    public $extraCssFile;
+
+    /**
      * @var string[] array of allowed blocks
      */
     public $allowedBlocks;

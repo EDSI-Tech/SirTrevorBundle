@@ -182,10 +182,12 @@ edsi_tech_sir_trevor:
     render_template: EdsiTechSirTrevorBundle:Render:base.html.twig
 ```
 
-### Adding an extra JS file
+### Adding an extra CSS or JS file
 
 You can inject another JS file, loaded after included JS libraries but before the editor is initialized.
 A common use case is to add some SirTrevor blocks.
+
+In the same manner, you can also add a CSS file, that will be included after all ours stylesheets.
 
 ```yaml
 # app/config/config.yml
@@ -195,6 +197,7 @@ edsi_tech_sir_trevor:
         - Heading
         - Custom # tip: do not forget to enable your custom block!
     extra_js_file: 'bundles/acmedemo/js/custom-block.js'
+    extra_css_file: 'bundles/acmedemo/css/style.css'
 ```
 
 

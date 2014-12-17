@@ -158,6 +158,11 @@
             // We load CSS without caring too much
             loadCSS(stylesheet);
 
+            // after we load user-provided file, so it can override stuff
+            {% if extra_css_file is not null %}
+                loadCSS('{{ asset(extra_css_file) }}');
+            {% endif %}
+
             var script = {% javascripts combine=true
                     'bundles/edsitechsirtrevor/jquery.min.js'
                     'bundles/edsitechsirtrevor/underscore-min.js'

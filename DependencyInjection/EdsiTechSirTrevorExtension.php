@@ -25,6 +25,7 @@ class EdsiTechSirTrevorExtension extends Extension
         $options->allowedBlocks = $config['allowed_blocks'];
         $options->blocksTheme   = $config['blocks_theme'];
         $options->extraJsFile   = $config['extra_js_file'];
+        $options->extraCssFile  = $config['extra_css_file'];
         $options->renderTemplate = $config['render_template'];
 
         $container->setParameter('edsi_tech_sir_trevor_options', $options);

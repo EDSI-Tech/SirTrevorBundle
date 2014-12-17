@@ -71,12 +71,13 @@ class SirTrevorExtension extends \Twig_Extension
     {
         if (isset($context['is_editable']) && $context['is_editable']) {
             return $environment->render(self::BLOCK_EDIT_TEMPLATE, [
-                'allowed_blocks' => $this->options->allowedBlocks,
-                'back_link'     => isset($context['back_link']) ? $context['back_link'] : null,
+                'allowed_blocks'    => $this->options->allowedBlocks,
+                'back_link'         => isset($context['back_link']) ? $context['back_link'] : null,
                 'display_flashMessages' => isset($context['display_flashMessages']) ? $context['display_flashMessages'] : true, // by default we display flashes in Edit
-                'extra_js_file' => $this->options->extraJsFile,
-                'json_blocks'   => $this->blockSerializer->serializeBlocks($blocks),
-                'save_bar_buttons' => isset($context['save_bar_buttons']) ? $context['save_bar_buttons'] : ''
+                'extra_css_file'    => $this->options->extraCssFile,
+                'extra_js_file'     => $this->options->extraJsFile,
+                'json_blocks'       => $this->blockSerializer->serializeBlocks($blocks),
+                'save_bar_buttons'  => isset($context['save_bar_buttons']) ? $context['save_bar_buttons'] : ''
             ]);
         }
 
