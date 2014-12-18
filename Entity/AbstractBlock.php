@@ -32,9 +32,18 @@ abstract class AbstractBlock
     protected $type;
 
     /**
+     * Position in a group
+     *
      * @ORM\Column(type="integer")
      */
     protected $position;
+
+    /**
+     * Group's number
+     *
+     * @ORM\Column(type="integer")
+     */
+    protected $group;
 
 
     /**
@@ -42,13 +51,15 @@ abstract class AbstractBlock
      * @param string $content
      * @param int $position
      * @param array $rawData
+     * @param int $group
      */
-    public function __construct($type, $content, $position, array $rawData)
+    public function __construct($type, $content, $position, array $rawData, $group = 0)
     {
         $this->type     = $type;
         $this->content  = $content;
         $this->position = $position;
         $this->rawData  = $rawData;
+        $this->group    = $group;
     }
 
     /**
@@ -99,6 +110,16 @@ abstract class AbstractBlock
     public function getPosition()
     {
         return $this->position;
+    }
+
+    /**
+     * Get group's number
+     *
+     * @return integer
+     */
+    public function getGroup()
+    {
+        return $this->group;
     }
 
     /**

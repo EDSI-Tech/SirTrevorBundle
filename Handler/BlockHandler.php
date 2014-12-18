@@ -59,6 +59,7 @@ class BlockHandler
 
         $block->type        = $data['type'];
         $block->position    = $position;
+        $block->group       = $data['group'];
 
         if (isset($data['data']['text'])) {
             $block->textContent = $data['data']['text'];

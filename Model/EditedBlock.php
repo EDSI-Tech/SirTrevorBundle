@@ -20,6 +20,11 @@ class EditedBlock
     public $position;
 
     /**
+     * @var int
+     */
+    public $group;
+
+    /**
      * @var string
      */
     public $textContent;

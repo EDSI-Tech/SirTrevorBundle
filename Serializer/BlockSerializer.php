@@ -10,13 +10,14 @@ class BlockSerializer
      * @param \Traversable $blocks
      * @return string JSON
      */
-    public function serializeBlocks($blocks)
+    public function serializeBlocks($blocks, $group)
     {
         $data = ['data' => []];
 
         /** @var AbstractBlock $block */
         foreach ($blocks as $block) {
             $aData = $block->getRawData();
+            $aData['group'] = $group;
 
             // make sure to inject (eventually) database-generated ID
             $aData['id'] = $block->getId();

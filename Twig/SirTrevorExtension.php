@@ -64,9 +64,10 @@ class SirTrevorExtension extends \Twig_Extension
      * @param \Twig_Environment $environment
      * @param $context
      * @param \Traversable $blocks
+     * @param $group
      * @return string
      */
-    public function cmsRender(\Twig_Environment $environment, $context, $blocks)
+    public function cmsRender(\Twig_Environment $environment, $context, $blocks, $group = 0)
     {
         if (isset($context['is_editable']) && $context['is_editable']) {
             return $environment->render(self::BLOCK_EDIT_TEMPLATE, [
@@ -75,7 +76,7 @@ class SirTrevorExtension extends \Twig_Extension
                 'display_flashMessages' => isset($context['display_flashMessages']) ? $context['display_flashMessages'] : true, // by default we display flashes in Edit
                 'extra_css_file'    => $this->options['extra_css_file'],
                 'extra_js_file'     => $this->options['extra_js_file'],
-                'json_blocks'       => $this->blockSerializer->serializeBlocks($blocks),
+                'json_blocks'       => $this->blockSerializer->serializeBlocks($blocks, $group),
                 'save_bar_buttons'  => isset($context['save_bar_buttons']) ? $context['save_bar_buttons'] : ''
             ]);
         }
